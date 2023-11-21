@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -57,14 +57,21 @@ namespace hw_20._11._2023_card_game
             }
         }
 
-        public bool Round(Player player, Player computer)
+        void PrintCurrentField(List<Card> RoundCards) {
+            Console.WriteLine("CURRENT FIELD: ");
+            foreach (Card card in RoundCards)
+                Console.WriteLine($"{card} ");
+        }
+
+        public bool StartGame(Player player, Player computer)
         {
-            Console.Clear();
             List<Card> RoundCards = new List<Card>();
             do
             {
-                Card PlayerCard = player.ChooseCard();
+                Console.Clear();
+
                 Card ComputerCard = computer.RandomCard();
+                Card PlayerCard = player.ChooseCard(); // здесь можно поменять на RandomCard и игра будет сама вычислять победителя.
 
                 RoundCards.Add(PlayerCard);
                 RoundCards.Add(ComputerCard);
@@ -72,9 +79,7 @@ namespace hw_20._11._2023_card_game
                 player.cardsInHand.Remove(PlayerCard);
                 computer.cardsInHand.Remove(ComputerCard);
 
-                Console.WriteLine("CURRENT FIELD: ");
-                foreach (Card card in RoundCards)
-                    Console.WriteLine($"{card} ");
+                PrintCurrentField(RoundCards);
 
                 Console.WriteLine($"Computer choose: {ComputerCard}");
                 Console.WriteLine($"Player choose: {PlayerCard}");
@@ -193,8 +198,6 @@ namespace hw_20._11._2023_card_game
             while (!int.TryParse(Console.ReadLine(), out choose) || choose < 0 || choose >= cardsInHand.Count)
                 Console.WriteLine("Invalid input. Please enter a valid number within the range.");
 
-
-            Console.Clear();
             return this.cardsInHand[choose];
         }
 
@@ -215,8 +218,7 @@ namespace hw_20._11._2023_card_game
             int i = 0;
             foreach (Card card in cardsInHand)
             {
-                Console.Write(i + " ");
-                Console.WriteLine(card);
+                Console.WriteLine(i + " " + card);
                 i++;
             }
         }
@@ -228,6 +230,7 @@ namespace hw_20._11._2023_card_game
         static void Main(string[] args)
         {
             Game game = new Game();
+
             List<Card> cards = game.CreateDeck();
             game.Shuffle(cards);
 
@@ -235,14 +238,7 @@ namespace hw_20._11._2023_card_game
             Player player2 = new Player();
 
             game.DealCards(player1, player2, cards);
-            Console.WriteLine("PLAYER 1 CARDS:");
-            //player1.Print();
-            Console.WriteLine("PLAYER 2 CARDS:");
-            //player2.Print();
-            //Console.WriteLine("Enter to continue...");
-            //Console.ReadLine();
-            
-            game.Round(player1, player2);
+            game.StartGame(player1, player2);
 
         }
     }
