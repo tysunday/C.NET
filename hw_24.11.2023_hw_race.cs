@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -92,33 +92,49 @@ namespace hw_24._11._2023_hw_race
                 Console.WriteLine($"{cars[currentCar]}");
 
             }
-            Thread.Sleep(500);
-            Console.Clear();
+            Console.WriteLine();
+            //Thread.Sleep(250);
+            //Console.Clear();
 
         }
     }
 
-    public delegate bool IsFinishDelegate(List<Car> cars, RaceWay raceway);
-    public delegate void GoDelegate();
+    delegate bool IsFinishDelegate(List<Car> cars, RaceWay raceway);
+    delegate void GoDelegate();
 
     class Game
     {
+        public event EventHandler<CarEventArgs> Finish;
+
+        public class CarEventArgs : EventArgs
+        {
+            public Car FinishedCar { get; }
+            public CarEventArgs(Car finishedCar)
+            {
+                FinishedCar = finishedCar;
+            }
+        }
+
         public Game()
         {
             Console.WindowHeight = 30;
             Console.WindowWidth = 280;
         }
-        public IsFinishDelegate IsFinishDelegateHandler;
-        public GoDelegate GoDelegateHandler;
+        IsFinishDelegate IsFinishDelegateHandler;
+        GoDelegate GoDelegateHandler;
         public bool IsFinish(List<Car> cars, RaceWay raceWay)
         {
             foreach (Car car in cars)
                 if (car.DistanceTraveled >= raceWay.Distance)
                 {
-                    Console.WriteLine($"{car} win race.");
+                    OnFinish(new CarEventArgs(car));
                     return true;
                 }
             return false;
+        }
+        void OnFinish(CarEventArgs args)
+        {
+            Finish?.Invoke(this, args);
         }
         public void Start()
         {
@@ -134,7 +150,12 @@ namespace hw_24._11._2023_hw_race
             foreach (Car car in cars)
                 GoDelegateHandler += car.Go;
 
-            while (!IsFinishDelegateHandler(cars,raceWay))
+            Finish += (sender, args) =>
+            {
+                Console.WriteLine($"{args.FinishedCar} has finished the race!");
+            };
+
+            while (!IsFinishDelegateHandler(cars, raceWay))
             {
                 raceWay.ShowRace(cars);
                 GoDelegateHandler();
