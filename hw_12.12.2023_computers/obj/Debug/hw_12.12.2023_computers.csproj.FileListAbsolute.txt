@@ -1,0 +1,10 @@
+D:\Projects\hw_12.12.2023_computers\bin\Debug\hw_12.12.2023_computers.exe.config
+D:\Projects\hw_12.12.2023_computers\bin\Debug\hw_12.12.2023_computers.exe
+D:\Projects\hw_12.12.2023_computers\bin\Debug\hw_12.12.2023_computers.pdb
+D:\Projects\hw_12.12.2023_computers\bin\Debug\ComputersDll.dll
+D:\Projects\hw_12.12.2023_computers\bin\Debug\ComputersDll.pdb
+D:\Projects\hw_12.12.2023_computers\obj\Debug\hw_12.12.2023_computers.csproj.AssemblyReference.cache
+D:\Projects\hw_12.12.2023_computers\obj\Debug\hw_12.12.2023_computers.csproj.CoreCompileInputs.cache
+D:\Projects\hw_12.12.2023_computers\obj\Debug\hw_12.12.2023_computers.csproj.CopyComplete
+D:\Projects\hw_12.12.2023_computers\obj\Debug\hw_12.12.2023_computers.exe
+D:\Projects\hw_12.12.2023_computers\obj\Debug\hw_12.12.2023_computers.pdb
