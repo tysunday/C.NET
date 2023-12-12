@@ -1,0 +1,18 @@
+Login:vladislav
+Password:vladislav
+Birthday: 18.10.2001
+Login:kursant
+Password:kursant
+Birthday: 18.10.2001
+Login:vkad
+Password:vkad
+Birthday:18.10.2001
+Login:mALO
+Password:mALO
+Birthday:18.10.2001
+Login:Krutoy
+Password:Krutoy
+Birthday:18.10.2001
+Login:Krutoyy
+Password:Krutoy
+Birthday:18.10.2001
